@@ -11,12 +11,17 @@ import Loc._
 
 import code.model.User
 
+import net.liftweb.mongodb._
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
 class Boot {
   def boot {
+    MongoDB.defineDb(DefaultMongoIdentifier,
+      MongoAddress(MongoHost("127.0.0.1", 27017), "asdf"))
+
     // where to search snippet
     LiftRules.addToPackages("code")
 

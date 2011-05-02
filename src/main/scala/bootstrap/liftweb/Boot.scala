@@ -9,6 +9,7 @@ import http._
 import sitemap._
 import Loc._
 
+import code.model.User
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -25,8 +26,8 @@ class Boot {
 
       // more complex because this menu allows anything in the
       // /static path to be visible
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content")))
+      Menu(Loc("Static", Link(List("static"), true, "/static/index"),
+	       "Static Content"))) ::: User.menus
 
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.
@@ -35,7 +36,7 @@ class Boot {
     //Show the spinny image when an Ajax call starts
     LiftRules.ajaxStart =
       Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
-    
+
     // Make the spinny image go away when it ends
     LiftRules.ajaxEnd =
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
